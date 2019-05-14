@@ -1,0 +1,9 @@
+services:
+
+    Plugandcom\Bundle\DigistratBundle\Service\:
+        autowire: true
+        autoconfigure: true
+        resource: '../../Service/*'
+
+#    Plugandcom\Bundle\DigistratBundle\Service\DigistratService:
+#        autowire: true

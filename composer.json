@@ -1,0 +1,33 @@
+{
+    "name": "plugandcom/digistrat-bundle",
+    "license": "proprietary",
+    "type": "symfony-bundle",
+    "description": "Digistrat client",
+    "keywords": [
+        "symfony",
+        "bundle",
+        "page"
+    ],
+    "homepage": "https://github.com/plugandcom/DigistratBundle",
+    "authors": [
+        {
+            "name": "Antonin M",
+            "email": "antonin@plugandcom.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.0",
+        "guzzlehttp/guzzle": ">=5.3.1",
+    },
+    "autoload": {
+        "psr-4": {
+            "Plugandcom\\Bundle\\PageBundle\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "extra": {
+        "installer-name": "PageBundle"
+    }
+}
