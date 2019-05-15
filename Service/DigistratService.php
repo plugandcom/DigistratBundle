@@ -5,11 +5,12 @@ namespace Plugandcom\Bundle\DigistratBundle\Service;
 use Exception;
 use GuzzleHttp\Client;
 use Plugandcom\Bundle\DigistratBundle\Model\SubList;
+use Plugandcom\Bundle\DigistratBundle\Model\Subscriber;
+use Plugandcom\Bundle\DigistratBundle\Model\Subscribers;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class DigistratService
 {
-    public const ERROR = 0;
     public const ADDED = 1;
     public const UPDATED = 2;
 
@@ -39,8 +40,7 @@ class DigistratService
 
         $res = [];
         foreach ($rawLists as $id => $list) {
-            $subList = new SubList();
-            $subList->setId($id);
+            $subList = new SubList($id);
             $subList->setName($list->nom);
             $subList->setUpdatedAt(new \DateTime($list->updated_at));
             $subList->setNbSubscribers($list->nb_abonnes);
@@ -56,10 +56,13 @@ class DigistratService
      * @return int Id de la nouvelle liste créée
      * @throws Exception
      */
-    public function newList(string $name): int
+    public function newList(string $name, bool $oneShot = true): int
     {
         $request = $this->client->post('list', [
-            'body' => $name
+            'body' => json_encode([
+                'name' => $name,
+                'oneShot' => $oneShot
+            ])
         ]);
 
         return (int) $request->getBody()->getContents();
@@ -81,6 +84,52 @@ class DigistratService
     public function deleteList(int $id): void
     {
         $this->client->delete('list/' . $id);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function addSubscribers(int $listId, Subscribers $subscribers): void
+    {
+        $data = $subscribers->getArrayItems();
+        array_unshift($data, ['email', 'phone', 'lastname', 'firstname']);
+
+        $req = $this->client->post('subscribers/' . $listId, [
+            'body' => json_encode($data)
+        ]);
+    }
+
+    /**
+     * @param int $listId
+     * @param Subscriber $subscriber
+     * @return int ADDED|UPDATED
+     */
+    public function addSubscriber(int $listId, Subscriber $subscriber): int
+    {
+        $emailValid = !empty($subscriber->getEmail());
+
+        $phoneValid = !empty($subscriber->getPhone());
+
+        if ($emailValid || $phoneValid) {
+            if ($emailValid) {
+                if (!filter_var($subscriber->getEmail(), FILTER_VALIDATE_EMAIL)) {
+                    throw new \InvalidArgumentException("Email {$subscriber->getEmail()} invalide.");
+                }
+            }
+        } else {
+            throw new \InvalidArgumentException("Veuillez renseigner au moins l'email ou le téléphone");
+        }
+
+        $req = $this->client->post('subscriber/' . $listId, [
+            'body' => json_encode([
+                'email' => $subscriber->getEmail(),
+                'phone' => $subscriber->getPhone(),
+                'firstname' => $subscriber->getFirstname(),
+                'lastname' => $subscriber->getLastname(),
+            ])
+        ]);
+
+        return (int) json_decode($req->getBody()->getContents(), false)->status;
     }
 
 }
