@@ -23,4 +23,4 @@ Puis ajouter le repo :
 
 Ou
 
-    composer require plugandcom/page-bundle
+    composer require plugandcom/digistrat-bundle
