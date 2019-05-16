@@ -1,4 +1,4 @@
-## Digistrat Bundle (WIP)
+## Digistrat Bundle
 
 Permet de faciliter la communication avec l'API Digistrat
 
@@ -44,10 +44,13 @@ digistrat:
     
 ### Utilisation
 
-Tout est dans DigistratService.
+L'API est utilisable directement via DigistratService.
 - getLists
 - newList
 - editList
 - deleteList
 - addSubscribers
 - addSubscriber
+
+Un formType est disponible pour les listes, `DigistratListType`, qui affiche toutes les listes liées à un utilisateur. 
+En twig il peut être overridé pour afficher davantage d'informations comme le nombre d'abonnés, la date de mise à jour, etc.

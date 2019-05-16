@@ -1,8 +1,11 @@
 services:
-    Plugandcom\Bundle\DigistratBundle\Service\:
+    _defaults:
         autowire: true
         autoconfigure: true
-        resource: '../../Service/*'
-        arguments:
+        bind:
             $endpoint: '%digistrat.endpoint%'
             $token: '%digistrat.token%'
+
+    Plugandcom\Bundle\DigistratBundle\:
+        resource: '../../*'
+        exclude: '../../{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
