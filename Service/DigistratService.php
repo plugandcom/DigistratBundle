@@ -21,7 +21,6 @@ class DigistratService
 
     public function __construct(string $endpoint, string $token)
     {
-        dd($endpoint);
         $this->client = new Client([
             'base_uri' => $endpoint,
             'headers' => ['X-AUTH-TOKEN' => $token]
