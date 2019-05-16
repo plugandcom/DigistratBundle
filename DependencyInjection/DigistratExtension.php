@@ -25,6 +25,7 @@ class DigistratExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yaml');
 
+        $container->setParameter('env(DIGISTRAT_ENDPOINT)', 'https://digistrat.net/api/v2/');
         $container->setParameter('digistrat.token', $config['token']);
         $container->setParameter('digistrat.endpoint', $config['endpoint']);
     }

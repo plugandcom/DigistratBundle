@@ -21,7 +21,7 @@ class Configuration implements ConfigurationInterface
                     ->cannotBeEmpty()
             ->end()
                 ->scalarNode('endpoint')
-                    ->defaultValue('https://digistrat.net/api/v2/')
+                    ->defaultValue('%env(DIGISTRAT_ENDPOINT)%')
                 ->end()
             ->end()
         ;

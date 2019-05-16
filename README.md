@@ -27,10 +27,14 @@ Ou
 
 ### Configuration
 
-Ajouter le token de l'utilisateur en variable d'environnement : 
-`DIGISTRAT_TOKEN='aaa'`
+#### Via variables d'environnement (recommandé) :
 
-ou bien créer un fichier `digistrat.yaml` et définir la config :
+```
+DIGISTRAT_TOKEN='aaa' # requis
+DIGISTRAT_ENDPOINT=http://digistrat.test/api/v2/ # optionnel, est déjà sur la bonne URL par défault
+```
+
+#### En Yaml directement :
 
 ```yaml
 digistrat:
