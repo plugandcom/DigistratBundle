@@ -24,3 +24,26 @@ Puis ajouter le repo :
 Ou
 
     composer require plugandcom/digistrat-bundle
+
+### Configuration
+
+Ajouter le token de l'utilisateur en variable d'environnement : 
+`DIGISTRAT_TOKEN='aaa'`
+
+ou bien créer un fichier `digistrat.yaml` et définir la config :
+
+```yaml
+digistrat:
+    token: 'aaa'  
+    endpoint: 'http://digistrat.test/app_dev.php/api/v2/'
+```
+    
+### Utilisation
+
+Tout est dans DigistratService.
+- getLists
+- newList
+- editList
+- deleteList
+- addSubscribers
+- addSubscriber

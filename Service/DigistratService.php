@@ -7,26 +7,23 @@ use GuzzleHttp\Client;
 use Plugandcom\Bundle\DigistratBundle\Model\SubList;
 use Plugandcom\Bundle\DigistratBundle\Model\Subscriber;
 use Plugandcom\Bundle\DigistratBundle\Model\Subscribers;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class DigistratService
 {
     public const ADDED = 1;
     public const UPDATED = 2;
 
-//    private const API_URL = 'https://digistrat.net/api/v2/';
-    private const ENDPOINT = 'http://digistrat.test/app_dev.php/api/v2/';
 
     /**
      * @var Client
      */
     private $client;
 
-    public function __construct()
+    public function __construct(string $endpoint, string $token)
     {
         $this->client = new Client([
-            'base_uri' => self::ENDPOINT,
-            'headers' => ['X-AUTH-TOKEN' => 'aaa']
+            'base_uri' => $endpoint,
+            'headers' => ['X-AUTH-TOKEN' => $token]
         ]);
     }
 
@@ -65,7 +62,7 @@ class DigistratService
             ])
         ]);
 
-        return (int) $request->getBody()->getContents();
+        return (int)$request->getBody()->getContents();
     }
 
     /**
@@ -129,7 +126,7 @@ class DigistratService
             ])
         ]);
 
-        return (int) json_decode($req->getBody()->getContents(), false)->status;
+        return (int)json_decode($req->getBody()->getContents(), false)->status;
     }
 
 }
