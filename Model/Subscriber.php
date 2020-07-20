@@ -6,6 +6,10 @@ namespace Plugandcom\Bundle\DigistratBundle\Model;
 class Subscriber implements \JsonSerializable
 {
 
+    public const STATUS_SUBSCRIBED = 0;
+    public const STATUS_BLACKLISTED = 1;
+    public const STATUS_UNASSIGNED = 2;
+
     /**
      * @var string
      */
@@ -25,6 +29,11 @@ class Subscriber implements \JsonSerializable
      * @var string
      */
     private $firstname;
+
+    /**
+     * @var int
+     */
+    private $status = self::STATUS_SUBSCRIBED;
 
     public function getEmail(): ?string
     {
@@ -66,9 +75,19 @@ class Subscriber implements \JsonSerializable
         $this->firstname = $firstname;
     }
 
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(int $status)
+    {
+        $this->status = $status;
+    }
+
     public function jsonSerialize()
     {
-        return [$this->email, $this->phone, $this->lastname, $this->firstname];
+        return [$this->email, $this->phone, $this->lastname, $this->firstname, $this->status];
     }
 
 }

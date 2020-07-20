@@ -13,10 +13,6 @@ class DigistratService
     public const ADDED = 1;
     public const UPDATED = 2;
 
-    public const SUBSCRIBED = 0;
-    public const BLACKLISTED = 1;
-    public const UNASSIGNED = 2;
-
     /**
      * @var Client
      */
@@ -126,6 +122,7 @@ class DigistratService
                 'phone' => $subscriber->getPhone(),
                 'firstname' => $subscriber->getFirstname(),
                 'lastname' => $subscriber->getLastname(),
+                'status' => $subscriber->getStatus(),
             ])
         ]);
 
@@ -135,7 +132,7 @@ class DigistratService
     /**
      * @param int $listId
      * @param Subscriber $subscriber
-     * @return int SUBSCRIBED|BLACKLISTED|UNASSIGNED
+     * @return int Subscriber::STATUS_SUBSCRIBED|Subscriber::STATUS_BLACKLISTED|Subscriber::STATUS_UNASSIGNED
      */
     public function getSubscriberEmailSubscriptionStatus(int $listId, string $email): int
     {
