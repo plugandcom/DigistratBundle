@@ -129,4 +129,16 @@ class DigistratService
         return (int)json_decode($req->getBody()->getContents(), false)->status;
     }
 
+    /**
+     * @param int $listId
+     * @param Subscriber $subscriber
+     * @return int SUBSCRIBED|BLACKLISTED|UNASSIGNED
+     */
+    public function getSubscriberEmailSubscriptionStatus(int $listId, string $email): int
+    {
+        $req = $this->client->get("subscriber/$listId/email/$email/subscription");
+
+        return (int)json_decode($req->getBody()->getContents(), false)->msg;
+    }
+
 }
