@@ -13,6 +13,9 @@ class DigistratService
     public const ADDED = 1;
     public const UPDATED = 2;
 
+    public const SUBSCRIBED = 0;
+    public const BLACKLISTED = 1;
+    public const UNASSIGNED = 2;
 
     /**
      * @var Client
