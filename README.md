@@ -4,7 +4,7 @@ Permet de faciliter la communication avec l'API Digistrat
 
 
 ### Installation 
-Ajouter le repo privé dans composer.json
+Ajouter le chemin du repo dans composer.json (il n'est pas sur packagist)
 
 ```json
     "repositories": [{
