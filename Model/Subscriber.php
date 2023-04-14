@@ -35,6 +35,11 @@ class Subscriber implements \JsonSerializable
      */
     private $status = self::STATUS_SUBSCRIBED;
 
+    /**
+     * @var array
+     */
+    private $extraField = [];
+
     public function getEmail(): ?string
     {
         return $this->email;
@@ -85,9 +90,19 @@ class Subscriber implements \JsonSerializable
         $this->status = $status;
     }
 
-    public function jsonSerialize()
+    public function getExtraFields(): array
     {
-        return [$this->email, $this->phone, $this->lastname, $this->firstname, $this->status];
+        return $this->extraField;
+    }
+
+    public function addExtraField(string $key, ?string $value): void
+    {
+        $this->extraField[$key] = $value;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [$this->email, $this->phone, $this->lastname, $this->firstname, $this->status, $this->getExtraFields()];
     }
 
 }

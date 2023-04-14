@@ -122,6 +122,7 @@ class DigistratService
                 'phone' => $subscriber->getPhone(),
                 'firstname' => $subscriber->getFirstname(),
                 'lastname' => $subscriber->getLastname(),
+                'extra_fields' => $subscriber->getExtraFields(),
                 'status' => $subscriber->getStatus(),
             ])
         ]);
