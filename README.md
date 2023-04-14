@@ -55,9 +55,9 @@ L'API est utilisable directement via DigistratService.
 Un formType est disponible pour les listes, `DigistratListType`, qui affiche toutes les listes liées à un utilisateur. 
 En twig il peut être overridé pour afficher davantage d'informations comme le nombre d'abonnés, la date de mise à jour, etc.
 
-### Attention
+### Etat
 
-Attention, l'état abonné ou désabonné d'un subscriber ne se répercute pas en utilisant `addSubscribers` en fait :D Ça marche juste pour `addSubscriber`
+Attention, l'état abonné ou désabonné d'un subscriber se répercute uniquement en utilisant `addSubscriber` et non `addSubscribers` qui correspond à un ajout global
 
 ### Champs supplémentaires
 
